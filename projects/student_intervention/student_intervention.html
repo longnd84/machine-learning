@@ -203,7 +203,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Import libraries</span>
@@ -219,7 +219,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Read student data</span>
@@ -267,7 +267,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#explore data</span>
@@ -321,7 +321,7 @@ Graduation rate of the class: 67.09%
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Extract feature (X) and target (y) columns</span>
@@ -395,7 +395,7 @@ Feature values:-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Preprocess feature columns</span>
@@ -454,7 +454,7 @@ Feature values:-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># First, decide how many training vs test samples you want</span>
@@ -464,7 +464,8 @@ Feature values:-
 
 <span class="c1"># Note: Shuffle the data or randomly select samples to avoid any bias due to ordering in the dataset</span>
 <span class="c1">#select the most &quot;important&quot; features (subjective)</span>
-<span class="n">X_all</span> <span class="o">=</span> <span class="n">X_all</span><span class="p">[[</span><span class="s1">&#39;Pstatus_A&#39;</span><span class="p">,</span> <span class="s1">&#39;Pstatus_T&#39;</span><span class="p">,</span> <span class="s1">&#39;Medu&#39;</span><span class="p">,</span><span class="s1">&#39;Fedu&#39;</span><span class="p">,</span><span class="s1">&#39;studytime&#39;</span><span class="p">,</span><span class="s1">&#39;failures&#39;</span><span class="p">,</span><span class="s1">&#39;higher&#39;</span><span class="p">,</span><span class="s1">&#39;famrel&#39;</span><span class="p">,</span><span class="s1">&#39;Dalc&#39;</span><span class="p">,</span><span class="s1">&#39;Walc&#39;</span><span class="p">,</span><span class="s1">&#39;health&#39;</span><span class="p">,</span><span class="s1">&#39;absences&#39;</span><span class="p">]]</span>
+<span class="c1">#test with feature selection</span>
+<span class="c1">#X_all = X_all[[&#39;Pstatus_A&#39;, &#39;Pstatus_T&#39;, &#39;Medu&#39;,&#39;Fedu&#39;,&#39;studytime&#39;,&#39;failures&#39;,&#39;higher&#39;,&#39;famrel&#39;,&#39;Dalc&#39;,&#39;Walc&#39;,&#39;health&#39;,&#39;absences&#39;]]</span>
 
 <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X_all</span><span class="p">,</span> <span class="n">y_all</span><span class="p">,</span> <span class="n">train_size</span><span class="o">=</span><span class="n">num_train</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="n">num_test</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="k">print</span> <span class="s2">&quot;Training set: {} samples&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
@@ -527,102 +528,146 @@ Test set: 95 samples
 <h3 id="Support-vector-machine-(SVM)-linear-classifier">Support vector machine (SVM) linear classifier<a class="anchor-link" href="#Support-vector-machine-(SVM)-linear-classifier">&#182;</a></h3><h4 id="Rationale">Rationale<a class="anchor-link" href="#Rationale">&#182;</a></h4><p>Support vector machine (SVM) is a simple yet effective linear classifier. Linear classifier is one of the most used classification techniques. It can also be used for multiple input variables/ features. 
 SVM makes standard linear classifier even more robust for new test set by maximizing the margin between the feature values. 
 Linear classification can be intuitively applied to our student data set by basically "dividing" the student into 2 categories (pass/fail) based on a combination of features/ characteristics (e.g. number of hours of studies, father/mother jobs).</p>
-<p>General strengths of SVM are: (1) Training is relatively easy: global optimum can always be found (with quadratic programming) (2) It scales well to high dementional data (multiple features)</p>
-<p>One of the weaknesses of SVM is that it needs a good kernel function to be effective.</p>
+<h4 id="Strengths-&amp;-weaknesses">Strengths &amp; weaknesses<a class="anchor-link" href="#Strengths-&amp;-weaknesses">&#182;</a></h4><p>(taken from in Scikit learn documentation, with extra comments for our data set)
+General strengths of SVM are:</p>
+<ol>
+<li>Effective in high dimensional spaces (applicable for this data set)</li>
+<li>Still effective in cases where number of dimensions is greater than the number of samples. </li>
+<li>Uses a subset of training points in the decision function (subpport vectors), so it is memory efficient (not very needed for the small data set) </li>
+<li>Versatile: different kernel functions can be provided. </li>
+</ol>
+<p>Disadvantages of SVM are:</p>
+<ol>
+<li>If number of features is much greater than number of samples, the method is likely to give poor performance. In our data set we have a sufficient number of samples (~20 times more than number of features). </li>
+<li>SVMs do not directly provide probability estimates, these are clculated using an expensive five-fold cross-validation. </li>
+</ol>
 <h4 id="Runtime">Runtime<a class="anchor-link" href="#Runtime">&#182;</a></h4><p>SVM can be solved with quadratic programming, so i would guess the runtime is O(n^2).</p>
 <h4 id="Results-on-train-&amp;-test-data">Results on train &amp; test data<a class="anchor-link" href="#Results-on-train-&amp;-test-data">&#182;</a></h4><table> 
     <tr> 
         <th> Train set</th> 
         <th> Training time (s)</th>
-        <th> Prediction time (s)</th>
+        <th> Prediction time train set (s)</th>
+        <th> Prediction time test set (s)</th>
         <th> F1 score train set </th>
         <th> F1 score test set </th>
     </tr> 
     <tr> 
         <td> 100</td> 
-        <td> 0.002</td> 
-        <td> 0.001</td> 
-        <td> 0.855263157895</td> 
-        <td> 0.815789473684</td> 
+        <td> 0.0018</td> 
+        <td> 0.0009</td> 
+        <td> 0.0008</td> 
+        <td> 0.859</td> 
+        <td> 0.833</td> 
     </tr> 
     <tr> 
         <td> 200</td> 
-        <td> 0.003</td> 
-        <td> 0.001</td> 
-        <td> 0.866449511401</td> 
-        <td> 0.844155844156</td> 
+        <td> 0.0063</td> 
+        <td> 0.0031</td> 
+        <td> 0.0012</td> 
+        <td> 0.858</td> 
+        <td> 0.840</td> 
     </tr> 
     <tr> 
         <td> 300</td> 
-        <td> 0.005</td> 
-        <td> 0.001</td> 
-        <td> 0.861538461538</td> 
-        <td> 0.847682119205</td> 
+        <td> 0.0084</td> 
+        <td> 0.0048</td> 
+        <td> 0.0016</td> 
+        <td> 0.8584</td> 
+        <td> 0.8462</td> 
     </tr> 
 </table><h3 id="Decision-Tree-classifier">Decision Tree classifier<a class="anchor-link" href="#Decision-Tree-classifier">&#182;</a></h3><h4 id="Description-&amp;-Rationale">Description &amp; Rationale<a class="anchor-link" href="#Description-&amp;-Rationale">&#182;</a></h4><p>Decision tree classification technique is most of the most simple yet widely used in supervised machine learning classification. Applying decision tree on the student intervention dataset can be intuitive and easy to explain to non-technical audience: we use each "feature" (characteristic) of students to subdivide them into smaller group. We can combine multiple features to subdivide them further.</p>
-<p>The general strengths of decision tree are (1) easy to understand and use (2) easy to implement (3) commutationally cheap (calculatable using maximum gain theory). 
-One of the weaknesses of decision tree is that it can overfit test data (can be seen with the result on student intervention data: high F1 score for train set but low for test set).</p>
+<h4 id="Strengths-&amp;-weaknesses">Strengths &amp; weaknesses<a class="anchor-link" href="#Strengths-&amp;-weaknesses">&#182;</a></h4><p>(taken from in Scikit learn documentation, with extra comments for our data set)</p>
+<p>Strengths applicable for our data set and problem domain in general:</p>
+<ol>
+<li>Simple to understand and inteprete. Trees can be visualized. </li>
+<li>Requires little data preparation. </li>
+<li>Relatively fast (logarithmic)</li>
+<li>Able to handle both numerical and categorical data (applicable for our dataset)</li>
+</ol>
+<p>Weaknesses:</p>
+<ol>
+<li>Overfitting (can be seen with high F1 score for train data, but low for test data)</li>
+<li>Can be unstable because of small variation in data (and small dataset). Can be mitigated using ensemble (gradient boosting). </li>
+</ol>
 <h4 id="Runtime">Runtime<a class="anchor-link" href="#Runtime">&#182;</a></h4><p>For each depth in the tree, the classification can be calculated using maximum information gain O(n). The tree would have on average log(n), so i would predict the runtime is O(n * log (n)).</p>
 <h4 id="Results-on-train-&amp;-test-data">Results on train &amp; test data<a class="anchor-link" href="#Results-on-train-&amp;-test-data">&#182;</a></h4><table> 
     <tr> 
         <th> Train set</th> 
         <th> Training time (s)</th>
-        <th> Prediction time (s)</th>
+        <th> Prediction time train set (s)</th>
+        <th> Prediction time test set (s)</th>
         <th> F1 score train set </th>
         <th> F1 score test set </th>
     </tr> 
     <tr> 
         <td> 100</td> 
         <td> 0.001</td> 
-        <td> 0.000</td> 
+        <td> 0.00026</td> 
+        <td> 0.00026</td> 
         <td> 1.0</td> 
-        <td> 0.681818181818</td> 
+        <td> 0.621</td> 
     </tr> 
     <tr> 
         <td> 200</td> 
-        <td> 0.001</td> 
-        <td> 0.000</td> 
-        <td> 0.996226415094</td> 
-        <td> 0.753623188406</td> 
+        <td> 0.0013</td> 
+        <td> 0.00031</td> 
+        <td> 0.000215</td> 
+        <td> 1.0</td> 
+        <td> 0.7424</td> 
     </tr> 
     <tr> 
         <td> 300</td> 
-        <td> 0.001</td> 
-        <td> 0.000</td> 
-        <td> 0.99746835443</td> 
-        <td> 0.661157024793</td> 
+        <td> 0.00844</td> 
+        <td> 0.00478</td> 
+        <td> 0.0016</td> 
+        <td> 0.8584</td> 
+        <td> 0.84615</td> 
     </tr> 
-</table><h3 id="(Ensemble)-Gradient-Boosting-Classifier">(Ensemble) Gradient Boosting Classifier<a class="anchor-link" href="#(Ensemble)-Gradient-Boosting-Classifier">&#182;</a></h3><h3 id="Description-&amp;-Rationale">Description &amp; Rationale<a class="anchor-link" href="#Description-&amp;-Rationale">&#182;</a></h3><p>The core idea behind gradient boosting classifier is turning multiple "weak" learners into "strong" learners through iterative steps. This can be very applicable in our data set: for example each weak learner in the student data set is picking one feature (e.g. number of hours spent on class, mother/father's education, wants to take higher education), do that iteratively to create a higher performing model. 
-One of the strengths of gradient boosting is its effectiveness: it is often cited as the most well performed model in machine learning classification. One of the weaknesses is its computational complexity (because it combines multiple classifiers).</p>
+</table><h3 id="(Ensemble)-Gradient-Boosting-Classifier">(Ensemble) Gradient Boosting Classifier<a class="anchor-link" href="#(Ensemble)-Gradient-Boosting-Classifier">&#182;</a></h3><h3 id="Description-&amp;-Rationale">Description &amp; Rationale<a class="anchor-link" href="#Description-&amp;-Rationale">&#182;</a></h3><p>The core idea behind gradient boosting classifier is turning multiple "weak" learners into "strong" learners through iterative steps. This can be very applicable in our data set: for example each weak learner in the student data set is picking one feature (e.g. number of hours spent on class, mother/father's education, wants to take higher education), do that iteratively to create a higher performing model.</p>
+<h3 id="Strengths-&amp;-weaknesses">Strengths &amp; weaknesses<a class="anchor-link" href="#Strengths-&amp;-weaknesses">&#182;</a></h3><p>(taken from Sci-learn documentation) 
+Strengths:</p>
+<ol>
+<li>Natural handling of data of mixed data (numerical, categorical) (applicable for our data set)</li>
+<li>Predictive power (produce good results, which is always important)</li>
+<li>Robustness to outliners in output space. More robust than for example decision tree. </li>
+</ol>
+<p>Weaknesses:</p>
+<ol>
+<li>Higher performance cost (multiple step needed). The steps are sequential and are difficult to parallelized). </li>
+</ol>
 <h3 id="Runtime">Runtime<a class="anchor-link" href="#Runtime">&#182;</a></h3><p>Boosting will combine multiple classifiers step by step. So for boosting of SVM, the complexity would be k <em> O(n^2), where k is the number of steps (number of weak learners). For boosting of decision trees, the compexity would be k </em> O(n * log(n)).</p>
 <h3 id="Results-on-train-&amp;-test-data">Results on train &amp; test data<a class="anchor-link" href="#Results-on-train-&amp;-test-data">&#182;</a></h3><table> 
     <tr> 
         <th> Train set</th> 
         <th> Training time (s)</th>
-        <th> Prediction time (s)</th>
+        <th> Prediction time train set (s)</th>
+        <th> Prediction time test set (s)</th>
         <th> F1 score train set </th>
         <th> F1 score test set </th>
     </tr> 
     <tr> 
         <td> 100</td> 
-        <td> 0.073</td> 
-        <td> 0.000</td> 
-        <td> 0.984848484848</td> 
-        <td> 0.69696969697</td> 
+        <td> 0.09</td> 
+        <td> 0.0007</td> 
+        <td> 0.0011</td> 
+        <td> 1.0</td> 
+        <td> 0.776</td> 
     </tr> 
     <tr> 
         <td> 200</td> 
-        <td> 0.080</td> 
-        <td> 0.000</td> 
-        <td> 0.959706959707</td> 
-        <td> 0.810810810811</td> 
+        <td> 0.114</td> 
+        <td> 0.0009</td> 
+        <td> 0.00056</td> 
+        <td> 1.0</td> 
+        <td> 0.776</td> 
     </tr> 
     <tr> 
         <td> 300</td> 
-        <td> 0.081</td> 
-        <td> 0.000</td> 
-        <td> 0.906542056075</td> 
-        <td> 0.851063829787</td> 
+        <td> 0.136</td> 
+        <td> 0.0013</td> 
+        <td> 0.00066</td> 
+        <td> 0.9706</td> 
+        <td> 0.8</td> 
     </tr> 
 </table>
 </div>
@@ -643,7 +688,7 @@ One of the strengths of gradient boosting is its effectiveness: it is often cite
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Train a model</span>
@@ -657,7 +702,7 @@ One of the strengths of gradient boosting is its effectiveness: it is often cite
     <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
     <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
     <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-    <span class="k">print</span> <span class="s2">&quot;Done!</span><span class="se">\n</span><span class="s2">Training time (secs): {:.3f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s2">&quot;Done!</span><span class="se">\n</span><span class="s2">Training time (secs): {:.6f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span>
 
 <span class="n">svm</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">()</span>
 <span class="n">tree</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">()</span>
@@ -686,13 +731,13 @@ One of the strengths of gradient boosting is its effectiveness: it is often cite
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Training SVC...
 Done!
-Training time (secs): 0.005
+Training time (secs): 0.007457
 Training DecisionTreeClassifier...
 Done!
-Training time (secs): 0.001
+Training time (secs): 0.002181
 Training GradientBoostingClassifier...
 Done!
-Training time (secs): 0.093
+Training time (secs): 0.146522
 </pre>
 </div>
 </div>
@@ -703,7 +748,7 @@ Training time (secs): 0.093
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Predict on training set and compute F1 score</span>
@@ -714,7 +759,7 @@ Training time (secs): 0.093
     <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
     <span class="n">y_pred</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">features</span><span class="p">)</span>
     <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-    <span class="k">print</span> <span class="s2">&quot;Done!</span><span class="se">\n</span><span class="s2">Prediction time (secs): {:.3f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s2">&quot;Done!</span><span class="se">\n</span><span class="s2">Prediction time (secs): {:.6f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">target</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">pos_label</span><span class="o">=</span><span class="s1">&#39;yes&#39;</span><span class="p">)</span>
 
 <span class="n">train_f1_score_svm</span> <span class="o">=</span> <span class="n">predict_labels</span><span class="p">(</span><span class="n">svm</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
@@ -738,16 +783,16 @@ Training time (secs): 0.093
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Predicting labels using SVC...
 Done!
-Prediction time (secs): 0.003
+Prediction time (secs): 0.005352
 Predicting labels using DecisionTreeClassifier...
 Done!
-Prediction time (secs): 0.000
+Prediction time (secs): 0.000826
 Predicting labels using GradientBoostingClassifier...
 Done!
-Prediction time (secs): 0.001
-F1 score for training set (SVM): 0.861538461538
-F1 score for training set (Tree): 0.99746835443
-F1 score for training set (Boost): 0.906542056075
+Prediction time (secs): 0.001110
+F1 score for training set (SVM): 0.858387799564
+F1 score for training set (Tree): 1.0
+F1 score for training set (Boost): 0.970588235294
 </pre>
 </div>
 </div>
@@ -758,7 +803,7 @@ F1 score for training set (Boost): 0.906542056075
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Predict on test data</span>
@@ -779,16 +824,16 @@ F1 score for training set (Boost): 0.906542056075
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Predicting labels using SVC...
 Done!
-Prediction time (secs): 0.001
-F1 score for test set: 0.847682119205
+Prediction time (secs): 0.002714
+F1 score for test set: 0.846153846154
 Predicting labels using DecisionTreeClassifier...
 Done!
-Prediction time (secs): 0.000
-F1 score for test set: 0.708661417323
+Prediction time (secs): 0.000309
+F1 score for test set: 0.672131147541
 Predicting labels using GradientBoostingClassifier...
 Done!
-Prediction time (secs): 0.001
-F1 score for test set: 0.851063829787
+Prediction time (secs): 0.000589
+F1 score for test set: 0.808823529412
 </pre>
 </div>
 </div>
@@ -799,7 +844,7 @@ F1 score for test set: 0.851063829787
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Train and predict using different training set sizes</span>
@@ -811,12 +856,11 @@ F1 score for test set: 0.851063829787
     <span class="k">print</span> <span class="s2">&quot;F1 score for test set: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">predict_labels</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
 
 <span class="c1"># Note: Keep the test set constant</span>
-<span class="k">for</span> <span class="n">experiment_train_size</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">300</span><span class="p">]:</span>
-    <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X_all</span><span class="p">,</span> <span class="n">y_all</span><span class="p">,</span> <span class="n">train_size</span><span class="o">=</span><span class="n">experiment_train_size</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="n">num_test</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-    <span class="n">train_predict</span><span class="p">(</span><span class="n">svm</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
-    <span class="n">train_predict</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
-    <span class="n">train_predict</span><span class="p">(</span><span class="n">boost</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">train_size</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">300</span><span class="p">]:</span>
+    <span class="n">train_predict</span><span class="p">(</span><span class="n">svm</span><span class="p">,</span> <span class="n">X_train</span><span class="p">[:</span><span class="n">train_size</span><span class="p">],</span> <span class="n">y_train</span><span class="p">[:</span><span class="n">train_size</span><span class="p">],</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+    <span class="n">train_predict</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">X_train</span><span class="p">[:</span><span class="n">train_size</span><span class="p">],</span> <span class="n">y_train</span><span class="p">[:</span><span class="n">train_size</span><span class="p">],</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+    <span class="n">train_predict</span><span class="p">(</span><span class="n">boost</span><span class="p">,</span> <span class="n">X_train</span><span class="p">[:</span><span class="n">train_size</span><span class="p">],</span> <span class="n">y_train</span><span class="p">[:</span><span class="n">train_size</span><span class="p">],</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
     <span class="k">print</span> <span class="s2">&quot;*************************************************&quot;</span>
 </pre></div>
 
@@ -834,121 +878,121 @@ F1 score for test set: 0.851063829787
 Training set size: 100
 Training SVC...
 Done!
-Training time (secs): 0.001
+Training time (secs): 0.001682
 Predicting labels using SVC...
 Done!
-Prediction time (secs): 0.001
-F1 score for training set: 0.855263157895
+Prediction time (secs): 0.000812
+F1 score for training set: 0.859060402685
 Predicting labels using SVC...
 Done!
-Prediction time (secs): 0.000
-F1 score for test set: 0.815789473684
+Prediction time (secs): 0.000765
+F1 score for test set: 0.833333333333
 ------------------------------------------
 Training set size: 100
 Training DecisionTreeClassifier...
 Done!
-Training time (secs): 0.001
+Training time (secs): 0.000826
 Predicting labels using DecisionTreeClassifier...
 Done!
-Prediction time (secs): 0.000
+Prediction time (secs): 0.000252
 F1 score for training set: 1.0
 Predicting labels using DecisionTreeClassifier...
 Done!
-Prediction time (secs): 0.000
-F1 score for test set: 0.646153846154
+Prediction time (secs): 0.000226
+F1 score for test set: 0.615384615385
 ------------------------------------------
 Training set size: 100
 Training GradientBoostingClassifier...
 Done!
-Training time (secs): 0.071
+Training time (secs): 0.099619
 Predicting labels using GradientBoostingClassifier...
 Done!
-Prediction time (secs): 0.001
-F1 score for training set: 0.984848484848
+Prediction time (secs): 0.000694
+F1 score for training set: 1.0
 Predicting labels using GradientBoostingClassifier...
 Done!
-Prediction time (secs): 0.001
-F1 score for test set: 0.69696969697
+Prediction time (secs): 0.000578
+F1 score for test set: 0.766917293233
 *************************************************
 ------------------------------------------
 Training set size: 200
 Training SVC...
 Done!
-Training time (secs): 0.003
+Training time (secs): 0.003887
 Predicting labels using SVC...
 Done!
-Prediction time (secs): 0.002
-F1 score for training set: 0.866449511401
+Prediction time (secs): 0.002609
+F1 score for training set: 0.858064516129
 Predicting labels using SVC...
 Done!
-Prediction time (secs): 0.001
-F1 score for test set: 0.844155844156
+Prediction time (secs): 0.001257
+F1 score for test set: 0.84076433121
 ------------------------------------------
 Training set size: 200
 Training DecisionTreeClassifier...
 Done!
-Training time (secs): 0.001
+Training time (secs): 0.001634
 Predicting labels using DecisionTreeClassifier...
 Done!
-Prediction time (secs): 0.000
-F1 score for training set: 0.996226415094
+Prediction time (secs): 0.000554
+F1 score for training set: 1.0
 Predicting labels using DecisionTreeClassifier...
 Done!
-Prediction time (secs): 0.000
-F1 score for test set: 0.755555555556
+Prediction time (secs): 0.000261
+F1 score for test set: 0.764705882353
 ------------------------------------------
 Training set size: 200
 Training GradientBoostingClassifier...
 Done!
-Training time (secs): 0.079
+Training time (secs): 0.110816
 Predicting labels using GradientBoostingClassifier...
 Done!
-Prediction time (secs): 0.001
-F1 score for training set: 0.959706959707
+Prediction time (secs): 0.001168
+F1 score for training set: 1.0
 Predicting labels using GradientBoostingClassifier...
 Done!
-Prediction time (secs): 0.000
-F1 score for test set: 0.816326530612
+Prediction time (secs): 0.000815
+F1 score for test set: 0.77037037037
 *************************************************
 ------------------------------------------
 Training set size: 300
 Training SVC...
 Done!
-Training time (secs): 0.005
+Training time (secs): 0.007950
 Predicting labels using SVC...
 Done!
-Prediction time (secs): 0.002
-F1 score for training set: 0.861538461538
+Prediction time (secs): 0.004926
+F1 score for training set: 0.858387799564
 Predicting labels using SVC...
 Done!
-Prediction time (secs): 0.001
-F1 score for test set: 0.847682119205
+Prediction time (secs): 0.001666
+F1 score for test set: 0.846153846154
 ------------------------------------------
 Training set size: 300
 Training DecisionTreeClassifier...
 Done!
-Training time (secs): 0.001
+Training time (secs): 0.002009
 Predicting labels using DecisionTreeClassifier...
 Done!
-Prediction time (secs): 0.000
-F1 score for training set: 0.99746835443
+Prediction time (secs): 0.000383
+F1 score for training set: 1.0
 Predicting labels using DecisionTreeClassifier...
 Done!
-Prediction time (secs): 0.000
-F1 score for test set: 0.698412698413
+Prediction time (secs): 0.000213
+F1 score for test set: 0.677685950413
 ------------------------------------------
 Training set size: 300
 Training GradientBoostingClassifier...
 Done!
-Training time (secs): 0.078
+Training time (secs): 0.138959
 Predicting labels using GradientBoostingClassifier...
 Done!
-Prediction time (secs): 0.001
-F1 score for training set: 0.906976744186
+Prediction time (secs): 0.001199
+F1 score for training set: 0.970588235294
 Predicting labels using GradientBoostingClassifier...
 Done!
-Prediction time (secs): 0.000
-F1 score for test set: 0.853146853147
+Prediction time (secs): 0.000638
+F1 score for test set: 0.8
 *************************************************
 </pre>
 </div>
@@ -984,17 +1028,22 @@ F1 score for test set: 0.853146853147
 </ul>
 <p>I would like to choose Gradient boosting for the final models because of the following reasons:</p>
 <ol>
-<li>It gives good results based on prior experiments</li>
-<li>It is one of the most used and high performing models for both academics and machine learning practitioners. </li>
+<li>From the F1 score in "training and evaluating model" section (4), SVM and Gradient Boosting are the good candidates to use. Decision Tree tends to overfit (very good F1 score with training set, but poor on test set), and it is unstable with a small traing set size (F1 score of test set around 0.66 when train set size is 100). </li>
+</ol>
+<p>For both SVM and Gradient Boosting, the F1 score for test set (for all train set size) are in the range of ~ 0.77 to 0.85, which is really good. The F1 score for the "without tuning" SVM is higher than Gradient Boosting, but we believe  proper tuning (GridSearchCV), we believe we can get higher with Gradient Boosting (this algorithm is well-known for its predictive power).</p>
+<ol>
+<li>It is one of the most used and high performing models for both academics and machine learning practitioners. A foremost strength of Gradient Boosting is its predictive power (giving good results). </li>
 <li>It can be intuitively applied to the students data set because it basically allow us to improve our prediction base on some simple guesses (weak learners). </li>
 <li>The run time (cost) of this model can be higher, but considering the small scale of the dataset (for the school district), the runtime and resources would be managable. </li>
 </ol>
-<p>Gradient boosting can be intuitively applied to the student data set because:</p>
+<p>Gradient boosting can be intuitively applied to the student data set because gradient boosting basically consists of doing the following steps repeatedly (until a certain tuned threshold):</p>
 <ol>
-<li>We can take a simple student characteristics (e.g. number of hours studying, parents jobs...) to predict the student outcome. This often already gives a better result than by chance (50%). </li>
-<li>Based on the prediction we got wrong, and combined with other "random" data, we can continued making new prediction based on other student characteristics. Since we "optimize" on the data set we got wrong, this will continue to product better results. </li>
+<li><p>The first step of gradient boosting is creating a decision tree. This is analogous to taking simple student characteristics (e.g. number of hours studying, parents jobs...) to predict the student outcome (e.g. less than 10 hours of study per week means fail, more meaning pass). This often already gives a better result than by chance (50%). We can do the same of each of the feature, and apply a certain weighting factor (importance) to each of those.  Applying decision tree to student data is also very intuitive since it categorize the students into pass/fail category using a single feature (student characteristics). This is also very easy to do.</p>
+</li>
+<li><p>The second step of gradient boosting is, not surprisingly "boosting". Based on the prediction we got wrong, and combined with other "random" data, we can continued making new prediction based on other student characteristics. Since we "optimize" on the data set we got wrong, this will continue to product better results. The key idea is based on the characterisics (decision tree) we decide in step (1), we can continuously adapt, and assign weighting factor to each of the feature (student characteristic) to arrive at a better student by each iteration.</p>
+</li>
 </ol>
-<p>Please run the following code to see grid search with gradient boosting and final results (can take one minute). 
+<p>Please run the following code to see grid search with gradient boosting and final results (can take 2 minute). 
 F1 score I get for train set size 300 is 0.855263157895.</p>
 
 </div>
@@ -1002,7 +1051,7 @@ F1 score I get for train set size 300 is 0.855263157895.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Fine-tune your model and report the best F1 score</span>
@@ -1033,7 +1082,7 @@ F1 score I get for train set size 300 is 0.855263157895.</p>
     <span class="n">scorer</span> <span class="o">=</span> <span class="n">make_scorer</span><span class="p">(</span><span class="n">performance_metric</span><span class="p">,</span> <span class="n">greater_is_better</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
     <span class="n">grid_search</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">boost</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">scoring</span> <span class="o">=</span> <span class="n">scorer</span><span class="p">)</span>
     <span class="c1">#print grid_search </span>
-    <span class="n">grid_search</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_all</span><span class="p">,</span> <span class="n">y_all</span><span class="p">)</span>
+    <span class="n">grid_search</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
     <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 
@@ -1065,47 +1114,47 @@ F1 score I get for train set size 300 is 0.855263157895.</p>
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Done!
- GridSearch CV time (secs): 101.323
-{&apos;n_estimators&apos;: 100, &apos;loss&apos;: &apos;deviance&apos;, &apos;learning_rate&apos;: 0.01, &apos;max_depth&apos;: 1}
+ GridSearch CV time (secs): 132.267
+{&apos;n_estimators&apos;: 100, &apos;loss&apos;: &apos;deviance&apos;, &apos;learning_rate&apos;: 0.01, &apos;max_depth&apos;: 3}
 ------------------------------------------
 Training set size: 100
 Training GradientBoostingClassifier...
 Done!
-Training time (secs): 0.036
+Training time (secs): 0.086457
 Predicting labels using GradientBoostingClassifier...
 Done!
-Prediction time (secs): 0.000
-F1 score for training set: 0.807453416149
+Prediction time (secs): 0.000521
+F1 score for training set: 0.902777777778
 Predicting labels using GradientBoostingClassifier...
 Done!
-Prediction time (secs): 0.000
-F1 score for test set: 0.838709677419
+Prediction time (secs): 0.000570
+F1 score for test set: 0.818791946309
 ------------------------------------------
 Training set size: 200
 Training GradientBoostingClassifier...
 Done!
-Training time (secs): 0.037
+Training time (secs): 0.119282
 Predicting labels using GradientBoostingClassifier...
 Done!
-Prediction time (secs): 0.001
-F1 score for training set: 0.815950920245
+Prediction time (secs): 0.000887
+F1 score for training set: 0.846153846154
 Predicting labels using GradientBoostingClassifier...
 Done!
-Prediction time (secs): 0.000
-F1 score for test set: 0.8375
+Prediction time (secs): 0.000527
+F1 score for test set: 0.835443037975
 ------------------------------------------
 Training set size: 300
 Training GradientBoostingClassifier...
 Done!
-Training time (secs): 0.050
+Training time (secs): 0.140824
 Predicting labels using GradientBoostingClassifier...
 Done!
-Prediction time (secs): 0.001
-F1 score for training set: 0.812631578947
+Prediction time (secs): 0.001132
+F1 score for training set: 0.846652267819
 Predicting labels using GradientBoostingClassifier...
 Done!
-Prediction time (secs): 0.000
-F1 score for test set: 0.855263157895
+Prediction time (secs): 0.000512
+F1 score for test set: 0.83660130719
 </pre>
 </div>
 </div>
