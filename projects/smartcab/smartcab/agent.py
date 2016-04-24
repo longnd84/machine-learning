@@ -96,7 +96,7 @@ class LearningAgent(Agent):
             """TODO: create a method for exploitation update"""
             exploitation_rate = 0.005
             self.exploitation_factor = min(0.99, self.exploitation_factor + exploitation_rate)
-            max_exploration_percentage = 10
+            max_exploration_percentage = 5
 
             #in the beginning (exploitation_rate low) we always explore, when we learn more, we give some room to explore
             if random.randint(0, int(100 * self.exploitation_factor)) < max_exploration_percentage: 
@@ -176,7 +176,7 @@ def run():
     # NOTE: You can set enforce_deadline=False while debugging to allow longer trials
 
     # Now simulate it
-    sim = Simulator(e, update_delay=0.5, display=True)  # create simulator (uses pygame when display=True, if available)
+    sim = Simulator(e, update_delay=0.1, display=True)  # create simulator (uses pygame when display=True, if available)
     # NOTE: To speed up simulation, reduce update_delay and/or set display=False
 
     sim.run(n_trials=100)  # run for a specified number of trials
