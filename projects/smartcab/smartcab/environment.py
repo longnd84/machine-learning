@@ -36,7 +36,9 @@ class Environment(object):
         self.t = 0
         self.agent_states = OrderedDict()
         self.status_text = ""
-
+        self.iteration = 0 #to calculate agent's success rate
+        self.agent_failure_since__adulthood = 0
+        self.nr_success = 0
         # Road network
         self.grid_size = (8, 6)  # (cols, rows)
         self.bounds = (1, 1, self.grid_size[0], self.grid_size[1])
@@ -73,6 +75,7 @@ class Environment(object):
         self.enforce_deadline = enforce_deadline
 
     def reset(self):
+        self.iteration += 1
         self.done = False
         self.t = 0
 
@@ -122,6 +125,10 @@ class Environment(object):
             elif self.enforce_deadline and agent_deadline <= 0:
                 self.done = True
                 print "Environment.step(): Primary agent ran out of time! Trial aborted."
+                adult_age = 50
+                if self.iteration > adult_age:
+                    self.agent_failure_since__adulthood += 1
+                    print "Number of failure since {} is {}".format(adult_age, self.agent_failure_since__adulthood)
             self.agent_states[self.primary_agent]['deadline'] = agent_deadline - 1
 
     def sense(self, agent):
@@ -204,7 +211,8 @@ class Environment(object):
                 if state['deadline'] >= 0:
                     reward += 10  # bonus
                 self.done = True
-                print "Environment.act(): Primary agent has reached destination!"  # [debug]
+                self.nr_success += 1
+                print "Environment.act(): Primary agent has reached destination! ", self.nr_success , " failure since adulthood", self.agent_failure_since__adulthood # [debug]
             self.status_text = "state: {}\naction: {}\nreward: {}".format(agent.get_state(), action, reward)
             #print "Environment.act() [POST]: location: {}, heading: {}, action: {}, reward: {}".format(location, heading, action, reward)  # [debug]
 
