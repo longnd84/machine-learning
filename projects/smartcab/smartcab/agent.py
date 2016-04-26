@@ -31,10 +31,10 @@ class LearningAgent(Agent):
         self.ellapsed_time = 0
 
         self.total_reward += self.trip_reward
-        self.trip_reward = 0
-        
 
         print "Trip reward ", self.trip_reward, " total reward ", self.total_reward
+        self.trip_reward = 0
+        
     def update_Q_learning_table(self, inputs, state, action, state_after_action, reward):
         learning_decay_rate = 0.002 
         min_learning_rate = 0.01
@@ -148,7 +148,7 @@ def run():
     # NOTE: You can set enforce_deadline=False while debugging to allow longer trials
 
     # Now simulate it
-    sim = Simulator(e, update_delay=0.01, display=True)  # create simulator (uses pygame when display=True, if available)
+    sim = Simulator(e, update_delay=0.5, display=True)  # create simulator (uses pygame when display=True, if available)
     # NOTE: To speed up simulation, reduce update_delay and/or set display=False
 
     sim.run(n_trials=100)  # run for a specified number of trials
