@@ -208,7 +208,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[72]:</div>
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Import libraries necessary for this project</span>
@@ -286,7 +286,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[73]:</div>
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Display a description of the dataset</span>
@@ -413,7 +413,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[74]:</div>
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Select three indices of your choice you wish to sample from the dataset</span>
@@ -512,8 +512,8 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>First sample (index 0) is the in the top 25% in the whole dataset in terms of Milk, Grocery,And Delicatessen. It is around the 50% mark in terms of Fresh and Frozen. It could probably be a "high-end" (medium/small) retail center.</p>
-<p>Second sample (index 1) is around the 50% mark median in term of fresh. It is on the low end in terms of milk, grocery. However, it is in the top 25% both in terms of Frozen and Delicatessen. It can be a retail center specialized in "high end far east" (frozen, but delicatessen) products.</p>
+<p>First sample (index 0) is the in the top 25% in the whole dataset in terms of Milk, Grocery,And Delicatessen. It is around the 50% mark in terms of Fresh and Frozen. It could probably be a "high-end" (medium/small) retail center. (top 25%)</p>
+<p>Second sample (index 1) is around the 50% mark median in term of fresh. It is on the low end in terms of milk, grocery. However, it is in the top 25% both in terms of Frozen and Delicatessen. It can be a retail center specialized in "high end far east" (frozen because have to import from far away, but delicatessen) products.</p>
 <p>Third sample (index 2) is the top in terms of Milk, Grocery, Frozen, Detergents_Paper. It is in the bottom ~40% of Delicatessen. It could probably be a supermarket.</p>
 
 </div>
@@ -541,7 +541,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[75]:</div>
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#for selected_column in [&#39;Fresh&#39;,&#39;Milk&#39;,&#39;Grocery&#39;,&#39;Frozen&#39;,&#39;Detergents_Paper&#39;,&#39;Delicatessen&#39;]:</span>
@@ -556,6 +556,7 @@ div#notebook {
 
 <span class="n">score</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">regressor</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
 
+<span class="k">print</span> <span class="n">regressor</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
 <span class="k">print</span> <span class="s2">&quot;Selected column {} score {} &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">selected_column</span><span class="p">,</span> <span class="n">score</span><span class="p">)</span>
 </pre></div>
 
@@ -569,7 +570,8 @@ div#notebook {
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Selected column Detergents_Paper score [ 0.87179059  0.71918794  0.7071405 ] 
+<pre>0.815241279195
+Selected column Detergents_Paper score [ 0.87179059  0.71918794  0.7071405 ] 
 </pre>
 </div>
 </div>
@@ -613,7 +615,7 @@ If the data is very large and feature removal is important, this feature can be 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[76]:</div>
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Produce a scatter matrix for each pair of features in the data</span>
@@ -2841,7 +2843,7 @@ The data for Grocery is most densed in the range from 0 to around 20000. Above t
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[77]:</div>
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Scale the data using the natural logarithm</span>
@@ -7819,7 +7821,7 @@ RU5ErkJggg==
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[78]:</div>
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Display the log-transformed sample data</span>
@@ -7910,7 +7912,7 @@ Once you have performed this implementation, the dataset will be stored in the v
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[80]:</div>
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># For each feature find the data points with extreme high or low values</span>
@@ -8636,7 +8638,7 @@ It is decided to remove the outliers that are outliers from more than 1 feature:
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[81]:</div>
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Apply PCA to the good data with the same number of dimensions as features</span>
@@ -9069,12 +9071,12 @@ iIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiMgl8/84golklawZPAAAAABJRU5ErkJggg==
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[82]:</div>
+<div class="prompt input_prompt">In&nbsp;[31]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">nr_keep_components</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">pca</span><span class="o">.</span><span class="n">explained_variance_ratio_</span><span class="p">),</span> <span class="s1">&#39;-o&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">pca</span><span class="o">.</span><span class="n">explained_variance_ratio_</span><span class="p">),</span> <span class="s1">&#39;-o&#39;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -9084,15 +9086,6 @@ iIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiMgl8/84golklawZPAAAAABJRU5ErkJggg==
 <div class="output_wrapper">
 <div class="output">
 
-
-<div class="output_area"><div class="prompt output_prompt">Out[82]:</div>
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[&lt;matplotlib.lines.Line2D at 0x106d64d10&gt;]</pre>
-</div>
-
-</div>
 
 <div class="output_area"><div class="prompt"></div>
 
@@ -9271,7 +9264,7 @@ Data are in order
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[83]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Display sample log-data after having a PCA transformation applied</span>
@@ -9359,7 +9352,7 @@ Data are in order
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[84]:</div>
+<div class="prompt input_prompt">In&nbsp;[34]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Fit PCA to the good data using only two dimensions</span>
@@ -9393,7 +9386,7 @@ Data are in order
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[85]:</div>
+<div class="prompt input_prompt">In&nbsp;[35]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Display sample log-data after applying PCA transformation in two dimensions</span>
@@ -9515,13 +9508,13 @@ Therefore we will use Gaussian Mixture Model for our analysis.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[86]:</div>
+<div class="prompt input_prompt">In&nbsp;[36]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Apply your clustering algorithm of choice to the reduced data </span>
 
 <span class="k">def</span> <span class="nf">calculate_clusters</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
-    <span class="n">clusterer</span> <span class="o">=</span> <span class="n">GMM</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="n">k</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">clusterer</span> <span class="o">=</span> <span class="n">GMM</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="n">k</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 
     <span class="n">clusterer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">reduced_data</span><span class="p">)</span>
     <span class="n">preds</span> <span class="o">=</span> <span class="n">clusterer</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">reduced_data</span><span class="p">)</span>
@@ -9547,7 +9540,7 @@ Therefore we will use Gaussian Mixture Model for our analysis.</p>
 <span class="c1">#store variables for use in next questions</span>
 <span class="p">(</span><span class="n">clusterer</span><span class="p">,</span> <span class="n">preds</span><span class="p">,</span> <span class="n">centers</span><span class="p">,</span> <span class="n">sample_preds</span><span class="p">,</span> <span class="n">score</span><span class="p">)</span> <span class="o">=</span> <span class="n">calculate_clusters</span><span class="p">(</span><span class="n">nr_components_max_score</span><span class="p">)</span>
 
-<span class="k">print</span> <span class="s2">&quot;Best silhouette score {} for {} number of components&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">silhouette_max</span> <span class="p">,</span> <span class="n">nr_components</span><span class="p">)</span>
+<span class="k">print</span> <span class="s2">&quot;Best silhouette score {} for {} number of components&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">silhouette_max</span> <span class="p">,</span> <span class="n">nr_components_max_score</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -9562,11 +9555,11 @@ Therefore we will use Gaussian Mixture Model for our analysis.</p>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Silhouette score is 0.411818864386 for 2 number of components
 Silhouette score is 0.376166165091 for 3 number of components
-Silhouette score is 0.333312614888 for 4 number of components
-Silhouette score is 0.280983407051 for 5 number of components
-Silhouette score is 0.27353716216 for 6 number of components
+Silhouette score is 0.332470648079 for 4 number of components
+Silhouette score is 0.277006754052 for 5 number of components
+Silhouette score is 0.28739910844 for 6 number of components
 Silhouette score is 0.411818864386 for 2 number of components
-Best silhouette score 0.411818864386 for 4 number of components
+Best silhouette score 0.411818864386 for 2 number of components
 </pre>
 </div>
 </div>
@@ -9608,7 +9601,7 @@ Best silhouette score 0.411818864386 for 4 number of components
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[87]:</div>
+<div class="prompt input_prompt">In&nbsp;[37]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Display the results of the clustering from implementation</span>
@@ -10803,7 +10796,7 @@ SZIkSdH5f44CWhLPraSFAAAAAElFTkSuQmCC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[88]:</div>
+<div class="prompt input_prompt">In&nbsp;[38]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Inverse transform the centers</span>
@@ -10886,10 +10879,10 @@ SZIkSdH5f44CWhLPraSFAAAAAElFTkSuQmCC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[89]:</div>
+<div class="prompt input_prompt">In&nbsp;[39]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">true_centers</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span> <span class="o">=</span> <span class="s1">&#39;bar&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">_</span> <span class="o">=</span> <span class="n">true_centers</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span> <span class="o">=</span> <span class="s1">&#39;bar&#39;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -10899,15 +10892,6 @@ SZIkSdH5f44CWhLPraSFAAAAAElFTkSuQmCC
 <div class="output_wrapper">
 <div class="output">
 
-
-<div class="output_area"><div class="prompt output_prompt">Out[89]:</div>
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.axes.AxesSubplot at 0x111286750&gt;</pre>
-</div>
-
-</div>
 
 <div class="output_area"><div class="prompt"></div>
 
@@ -11113,13 +11097,13 @@ ERERERERERERERERERERERGRk/p/JnisQjCmIhwAAAAASUVORK5CYII=
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[90]:</div>
+<div class="prompt input_prompt">In&nbsp;[40]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">all_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;customers.csv&quot;</span><span class="p">)</span>
 <span class="n">all_data</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;Region&#39;</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
 <span class="n">all_means</span> <span class="o">=</span> <span class="n">all_data</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;Channel&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-<span class="n">all_means</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span> <span class="n">all_means</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -11129,15 +11113,6 @@ ERERERERERERERERERERERGRk/p/JnisQjCmIhwAAAAASUVORK5CYII=
 <div class="output_wrapper">
 <div class="output">
 
-
-<div class="output_area"><div class="prompt output_prompt">Out[90]:</div>
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.axes.AxesSubplot at 0x10c7ecd50&gt;</pre>
-</div>
-
-</div>
 
 <div class="output_area"><div class="prompt"></div>
 
@@ -11361,13 +11336,48 @@ ERERERERERERERFpvf4faTAbbFvWPMkAAAAASUVORK5CYII=
 </div>
 
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[44]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">diff_data_mean</span> <span class="o">=</span> <span class="n">true_centers</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">good_data</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">diff_data_mean</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>           Fresh  Milk  Grocery  Frozen  Detergents_Paper  Delicatessen
+Segment 0  -2100  2958     4832    -481              2150           138
+Segment 1   2396 -1337    -2034     541              -559           -95
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong></p>
-<p>The segment 0, 1 output from the GMM clustering algirthm could best present the "Channel" feature (["Horeca", "Retail"])in the original data set.</p>
+<p>The table above (diff_data_mean) shows the difference of each cluster true means with the mean of the whole dataset.</p>
+<ol>
+<li>Segment 0 is well above the mean in terms of Grocery (4832), Milk (2958) and Detergents_Paper. It is well below the means in terms of Fresh, and a bit below the mean in terms of Frozen. In terms of Delicatessen it is a bit above the mean. </li>
+<li>Segment 1 is well above the mean in terms of Fresh (2396), a bit above the means in terms of Frozen. It is well below the means in term of Grocery (-2024) and Milk (-1337). </li>
+</ol>
+<p>Furthermore, the segment 0, 1 output from the GMM clustering algirthm could best present the "Channel" feature (["Horeca", "Retail"])in the original data set.</p>
 <p>From the 2 graphs above, we observe:</p>
 <ol>
 <li>Segment 0 correlates with Channel 2 in the original data set.</li>
@@ -11375,7 +11385,6 @@ ERERERERERERERFpvf4faTAbbFvWPMkAAAAASUVORK5CYII=
 </ol>
 <p>Cluster/Segment 0 's true center has the highest amount of Fresh, Milk and Grocery (~ 4000, 6000, and 10000 respectively) could best represent "Retail" (supermarket) establishment.</p>
 <p>Cluster/Segment 1 's true center has the highest amount of Fresh (8000), the rest lower than segment 1 could best represent "Horeca" establishment, since they often need fresh product.</p>
-<p>(I don't see the benefit of comparing true_center to the original data set description without grouping by "Channel". Do i see something wrong?)</p>
 
 </div>
 </div>
@@ -11672,18 +11681,18 @@ Comparing the true center plot in question 8 and the sample point plot about:</p
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong>
 Products like Fresh, Milk, Grocery, and Delicatessen often need frequent stocking (e.g. prefer 5 days per week shipping to 3 days per week shipping). 
-The remaining products (Frozen, Detergents_Paper) can be kept for longer and be less sensitive to infrequent delivery (unless the retail center/ restaurent has a very small shelf/ warehouse). 
-Furthermore, customers who purchase a small number of amount are either smaller or have limited storage space, or have different types of need.</p>
-<p>I would recommend to cluster (segment)  the data based on the features (products) where the constant supply of data is essential. We can then create 2 different clusters (which more focus on the features which could be most impacted by the changed delivery frequency).</p>
+The remaining products (Frozen, Detergents_Paper) can be kept for longer and be less sensitive to infrequent delivery (unless the retail center/ restaurent has a very small shelf/ warehouse).</p>
+<p>We can use the cluster information (segment) we just generated for this purpose. If needed, we can tweak the cluster algorithm a bit to put more weights to the features that are more sensitive to shiping data like described above.</p>
 <p>Assume after the clustering, we determine:</p>
 <ol>
-<li>Cluster 0 are the customers with the highest amount of Fresh, Milk, Grocery and Delicatessen. </li>
-<li>Cluster 1 are the cusmters with the lower amount of Fresh, Milk, Grocey and Delicatessen.</li>
+<li>Cluster 0 are the customers with the highest amount of Fresh, Milk, Grocery, and delicatessen. (similar to segment 0 of the first graph that shows true center in question 8) </li>
+<li>Cluster 1 are the cusmters with the lower amount of Milk, Grocery and Delicatessen (similar to segment 1 of the first graph that shows true center in question 8).</li>
 </ol>
+<p>Our hypothesis is the cluster 0 shall be affected more by the change of schedule from 5 days back to 3 days per week.</p>
 <p>We should run the following A/B tests. A: 5 days per week delivery. B 3 days per week delivery. Experiment variable: satisfaction of client with the delivery.</p>
 <ol>
-<li>Control group: set of randomized customers. Test group: set of cluster 0 (more fresh). The satisfaction of test group  When we change delivery from 5 days (A) to 3 days (B) per week, the disatisfaction of the test group should increase. </li>
-<li>Control group: set of randomized customers. Test group: set of cluster 1 (less fresh). When we change delivery from 5 days (A) to 3 days (B) per week, the satisfaction of the test group should stay the same. </li>
+<li>Control group: set of randomized customers. Test group: set of cluster 0 (more fresh, bullet 1 above). The satisfaction of test group  When we change delivery from 5 days (A) to 3 days (B) per week, the disatisfaction of the test group should increase. </li>
+<li>Control group: set of randomized customers. Test group: set of cluster 1 (less fresh, bullet 2 above). When we change delivery from 5 days (A) to 3 days (B) per week, the satisfaction of the test group should stay the same. </li>
 </ol>
 
 </div>
