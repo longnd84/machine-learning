@@ -35,6 +35,8 @@ def explore_data(file_name):
     print df.describe()
     print "Number of days (samples) ", n_days
     print "Number of features ", n_features
+
+    print df.head()
     
     return df
 
@@ -247,8 +249,8 @@ def explore_web_data(symbol, start_date, end_date):
 #df = explore_data("data/McDonald.csv")
 #df = explore_data("data/Siemens.csv")
 #df = explore_data("data/HP.csv")
-df = explore_data("data/yahoo.csv")
-#df = explore_data("data/facebook.csv")
+#df = explore_data("data/yahoo.csv")
+df = explore_data("data/facebook.csv")
 #df = explore_data("data/tesla.csv")
 
 
