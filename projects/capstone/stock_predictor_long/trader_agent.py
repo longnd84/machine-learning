@@ -29,15 +29,15 @@ class TraderAgent:
     
     #may need to give better default value for "hold" to prevent constant buying/ selling (longer term investment)?
     
-    DEFAULT_Q_VALUE_HOLD = 0
+    DEFAULT_Q_VALUE_HOLD = 5
     DEFAULT_Q_VALUE_BUY = 10 # in the beginning we need to put more "motivation" for buying, because stock value tends to increase over time
     #and because we have money to invest
     DEFAULT_Q_VALUE_SELL = 0
     
-    LEARNING_DECAY_RATE = 0.005 
+    LEARNING_DECAY_RATE = 0.005 #the "older" we get, the less learning we tend to do. Higher means less willing to learn over time 
     DISCOUNT_FACTOR = 0.1 #0 long term, 1 short term
-    EXPLOITATION_INCREASE_RATE = 0.005
-    MAX_EXPLORE_PERCENTAGE = 3
+    EXPLOITATION_INCREASE_RATE = 0.005 # this is the reverse of learning decay rate. 
+    MAX_EXPLORE_PERCENTAGE = 15
     
     #for "blue-chip" stocks generally we want to buy early a lot, and sell a little?
     #in the beginning needs to put more motivation for buying?
@@ -98,6 +98,7 @@ class TraderAgent:
         adj_closed_rolling_ratio= data['Adj Close'] / data['Rolling']
 
         adj_closed_bol_low = data['Adj Close'] / data['Bol_lower']
+        #adj_closed_bol_low = data['Bol_lower'] / data['Adj Close']
         adj_closed_bol_up = data['Adj Close'] / data['Bol_upper']
 
         holding_stock_value = holding_stock * data['Adj Close'] #not realtime, just take the price at the end of the day
@@ -157,7 +158,6 @@ class TraderAgent:
         self.q_table[q_key] = (1 - self.learning_rate) * self.q_table[q_key] + self.learning_rate * (reward + TraderAgent.DISCOUNT_FACTOR * max_next_state)        
                                                     
     def calculate_reward_update_asset(self, action, data):
-        #ah calculation is wrong. number of stocks can be splitted
         #reward diff can not be used between Open and Adj Close (does not take split into account)
         #for calculating reward and asset update, we use "close". shall be corrected later
         #(for number of stocks) when we find split of stocks
@@ -275,16 +275,63 @@ class TraderAgent:
         print "Number of Q value ", len(self.q_table.keys()) , ' nr explores ' , self.nr_explores , ' nr exploits ', self.nr_exploits
 
         return df
+
+    def visualize_performance(self, result, stock_name):
+        result['Market gain'] = result['Rolling']
+        result['Trader agent gain (Q-learning)'] = result['ROI']
+        result[['Market gain', 'Trader agent gain (Q-learning)']].plot()
+
+        plt.xlabel('Days (smaller = more recent)')
+        plt.ylabel('Relative performance (higher = better)')
+        plt.title("Performance comparison for " + stock_name.upper())
+        plt.show()
+
+    def visualize_q_table(self, stock_name):
+        state_length = math.pow(TraderAgent.SUB_STATE_QUANTIZE_RESOLUTION+1, 3)
+        sub_state_length = TraderAgent.SUB_STATE_QUANTIZE_RESOLUTION+1
+        #examine rolling only for now, calculate the buy averaging the rest (bollinger band state) 
+        buy_rolling_series = Series(range(sub_state_length))
+        sell_rolling_series = Series(range(sub_state_length))
+        hold_rolling_series = Series(range(sub_state_length))
+        
+        for i in range(0, sub_state_length):
+            total_rolling_buy = 0
+            total_rolling_sell = 0
+            total_rolling_hold = 0
+            nr_entries = 0
+            for j in range(0, sub_state_length):
+                for k in range(0, sub_state_length):
+                    total_rolling_buy += self.q_table[((i, j, k), 'buy')]
+                    total_rolling_sell += self.q_table[((i, j, k), 'sell')]
+                    total_rolling_hold += self.q_table[((i, j, k), 'hold')]
+                    nr_entries += 1
+                
+            buy_rolling_series[i] = float(total_rolling_buy / nr_entries)
+            sell_rolling_series[i] = float(total_rolling_sell / nr_entries)
+            hold_rolling_series[i] = float(total_rolling_hold / nr_entries)
+
+        q_table_df = DataFrame({
+                'Buy' : buy_rolling_series,
+                'Sell' : sell_rolling_series,
+                'Hold' : hold_rolling_series
+            })
+
+        q_table_df[['Buy', 'Sell', 'Hold']].plot()
+        
+        plt.xlabel("Normalized Adj Close/ Rolling average. Middle (2.5) means Equal price. Right: stock expensive. Left: stock cheap ")
+        plt.ylabel("Relative value: higher = more likely to choose")
+        plt.title("Average Q value of substate Adj Close / Rolling average: "+ stock_name.upper())
+        
+        plt.show()
     
     #become a real trader
-    def trade(self, df, capital):
+    def trade(self, df, capital, display_graph, stock_name):
 
         result = self.learn(df, capital) #maybe still do learning with another factor
 
         #for key in self.q_table.keys():
         #    print key , " => " , self.q_table[key]
-            
-        result[['Rolling', 'ROI', 'Stock owned', 'Cash']].plot()
-        plt.show()
 
-    
+        if display_graph:
+            self.visualize_performance(result, stock_name)
+            #self.visualize_q_table(stock_name)

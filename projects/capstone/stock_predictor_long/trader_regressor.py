@@ -24,11 +24,10 @@ from pandas import DataFrame, Series
 
 import matplotlib.pyplot as plt
 
-#feature_cols = ['Open','High','Low','Close','Volume','Rolling','Adj Close Prev']
-feature_cols = ['Open','High','Low','Close','Volume','Adj Close Prev']
-#feature_cols_bols = ['Open','High','Low','Close','Volume', 'Rolling', 'Bol_lower', 'Bol_upper']
+feature_cols = ['Open','High','Low','Close','Volume','Rolling','Adj Close Prev']
+#feature_cols = ['Open','High','Low','Close','Volume']
 number_days_max = 270 #max data set around 1 year (working days)
-
+number_days_pred = 5
 def explore_data(file_name):
     df = pd.read_csv(file_name)
     df = df.iloc[::-1] #reverse data to have the right chronological order
@@ -61,7 +60,7 @@ def preprocess_data(df):
     
     rm_adjustedClose = pd.rolling_mean(df['Adj Close Prev'], window=rolling_window_days)
     
-    #df['Rolling'] = rm_adjustedClose  #rm_adjustedClose.fillna(df['Adj Close'])
+    df['Rolling'] = rm_adjustedClose  #rm_adjustedClose.fillna(df['Adj Close'])
 
     #having bollingen band seems to make regression worse (but may make prediction more safe): predict inside the band
     #df['Bol_upper'] = pd.rolling_mean(df['Adj Close'], window=rolling_window_days) + 2 * pd.rolling_std(df['Adj Close'], rolling_window_days, min_periods=rolling_window_days)
@@ -80,7 +79,7 @@ def preprocess_data(df):
 """
 def split_data(X_all, y_all):
     num_all = X_all.shape[0]
-    num_train = num_all - 5 # only need to test 5 days, stock data is time-sensitive, we don't have to predict long in advance
+    num_train = num_all - number_days_pred # only need to test 5 days, stock data is time-sensitive, we don't have to predict long in advance
     num_test = num_all - num_train
     
 
@@ -162,7 +161,7 @@ def plot_feature_importance(regressor, params, X_test, y_test):
     
     plt.show()
 
-def optimize_learning_model(regressor, X_train, y_train, X_test, y_test):
+def optimize_learning_model(regressor, X_train, y_train, X_test, y_test, display_graph):
     start =  time.time()
     #plot_feature_importance(regressor, params, X_test, y_test)
 
@@ -192,42 +191,48 @@ def optimize_learning_model(regressor, X_train, y_train, X_test, y_test):
                                    loss = best_params['loss'])
 
     boost_optimized.fit(X_train, y_train)
-    
-    error = mean_absolute_error(y_test, boost_optimized.predict(X_test))
-    error_train = mean_absolute_error (y_train, boost_optimized.predict(X_train))
-
-    print "Optimized boosting ******"
-    print ("MAE testing (optimized) : %.4f" %error)
-    print ("MAE train (optimized): %.4f" %error_train)
-
     end = time.time()
     print "Time needed for tuning "  ,(end-start)
+    print "Optimized boosting results **************"    
+    calculate_results(boost_optimized, X_train, X_test, y_train, y_test)
+    print "End optimized boosting results *****"
+    if display_graph:
+        plot_feature_importance(boost_optimized, best_params, X_test, y_test)
 
-    plot_feature_importance(boost_optimized, best_params, X_test, y_test)
-
+"""
+    Calculate the regressor performance
+    Print the stats for a regressor using the trainign, testing data set
+    and the defined performance metrics (MAE)
+"""
+def calculate_results(regressor, X_train, X_test, y_train, y_test):
+    print "Stats for ",regressor.__class__.__name__
+    
+    y_predict = regressor.predict(X_test)
+    
+    mae = mean_absolute_error(y_test, y_predict)
+    mae_price_ratio = mae * 100/ np.mean(y_test)
+    mae_train = mean_absolute_error (y_train, regressor.predict(X_train))
+    mae_train_price_ratio = mae_train * 100 / np.mean(y_test)
+    
+    print ("MAE test set: %.4f" %mae)
+    print ("MAE test set as percentage of price: %.4f" %mae_price_ratio)
+    print ("MAE train set: %.4f" %mae_train)
+    print ("MAE train set as as percentage of price: %.4f" %mae_train_price_ratio)
+    print "-----------------------------"
+    
 def train_learning_model_svm(df):
     X_all, y_all = preprocess_data(df)
     X_train, X_test, y_train, y_test = split_data(X_all, y_all)
 
     regressor = SVR()
-    #just use default parameter first
     regressor.fit(X_train, y_train)
-
-    y_predict = regressor.predict(X_test)
-    
-    mae = mean_absolute_error(y_test, y_predict)
-    mae_over_price = mae * 100/ np.mean(y_test)
-    mae_train = mean_absolute_error (y_train, regressor.predict(X_train))
-
-    print ("(SVM regression) MAE test set: %.4f" %mae)
-    print ("(SVM regression) MAE as percentage of price: %.4f" %mae_over_price)
-    print ("(SVM regression) MAE train set: %.4f" %mae_train)
+    calculate_results(regressor, X_train, X_test, y_train, y_test)
     
 """
     Build a GradientBoostingRegressor model, train the model with the data set,
     test the model with the test say and print out the performance metrics
 """
-def train_learning_model_gradient_boost(df):
+def train_learning_model_gradient_boost(df, use_grid_search, display_graph):
     #code taken and adapted from http://scikit-learn.org/stable/auto_examples/ensemble/plot_gradient_boosting_regression.html#example-ensemble-plot-gradient-boosting-regression-py
     
     X_all, y_all = preprocess_data(df)
@@ -237,20 +242,12 @@ def train_learning_model_gradient_boost(df):
     regressor = ensemble.GradientBoostingRegressor()
     regressor.fit(X_train, y_train)
 
-    y_predict = regressor.predict(X_test)
-    
-    mae = mean_absolute_error(y_test, y_predict)
-    mae_train = mean_absolute_error (y_train, regressor.predict(X_train))
-    mae_over_price = mae * 100 / np.mean(y_test)
-    print ("(Gradient boosting) MAE test set: %.4f" %mae)
-    print ("(Gradient boosting) MAE as percentage of price: %.4f" %mae_over_price)
-    print ("(Gradient boosting) MAE train set: %.4f" %mae_train)
 
-    #comment out when needed, takes longer
-    #optimize_learning_model(regressor, X_train, y_train, X_test, y_test)
-    
+    calculate_results(regressor, X_train, X_test, y_train, y_test)
+    if use_grid_search == True:
+        optimize_learning_model(regressor, X_train, y_train, X_test, y_test, display_graph)
+        
     return regressor
-
     
 def visualize_data(df, field_names):
     df[field_names].plot()
@@ -267,35 +264,14 @@ def explore_web_data(symbol, start_date, end_date):
     plt.show()
     print data.tail()
 
-#Choose the data set
-    
-#df = explore_data("data/Google.csv")
-#df = explore_data("data/Apple.csv")
-#df = explore_data("data/Intel.csv")
-#df = explore_data("data/Microsoft.csv")
-#df = explore_data("data/MicrosoftDotComBurst.csv")
-#df = explore_data("data/ibmfrom2005.csv")
-#df = explore_data("data/philips.csv")
-#df = explore_data("data/shell.csv")
-#df = explore_data("data/exxon.csv")
-#df = explore_data("data/bankA.csv")
+stocks = ['Google','facebook', 'tesla']
 
-#df = explore_data("data/GE.csv") 
-#df = explore_data("data/Walmart.csv")
-#df = explore_data("data/McDonald.csv")
-#df = explore_data("data/Siemens.csv")
-#df = explore_data("data/HP.csv")
-#df = explore_data("data/yahoo.csv")
-#df = explore_data("data/facebook.csv")
-#df = explore_data("data/tesla.csv")
-
-
-#visualize(df)
-for dataset in ['data/Google.csv', 'data/tesla.csv']:
-    print 'Experimenting with data set ', dataset
-    df = explore_data("data/Google.csv")
-    train_learning_model_gradient_boost(df)
+for stock_name in stocks:
+    print '********Experimenting with data set ', stock_name
+    df = explore_data('data/'+stock_name+'.csv')
+    #True for 3rd parameter for visualization, True for 2nd for Gridsearch
+    train_learning_model_gradient_boost(df, True, False)
     train_learning_model_svm(df)
-    print "---------------------------------"
+    print "*********************************"
 
 
