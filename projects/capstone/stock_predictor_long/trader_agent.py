@@ -8,6 +8,23 @@ from math import *
 from pandas import DataFrame, Series
 import matplotlib.pyplot as plt
 
+
+
+"""
+    Build a q-learning model to maximize profit from a begin capital
+    Think of the agent as a novice user with a starting capital
+    He learns/act by trading everyday. The goal is to maximize 
+
+    Action: hold, buy (how much?), sell (how much?)
+    Reward: daily return
+
+    State: quantized combination of
+        adjusted close/ rolling mean
+        Bollinger band (use both lower and upper)
+    
+    The effectiveness of the model can be judged by how much he/she has earnt
+    after the model is learnt
+"""
 class TraderAgent:
     
     #may need to give better default value for "hold" to prevent constant buying/ selling (longer term investment)?
@@ -70,6 +87,7 @@ class TraderAgent:
         bol_up_quantized = self.quantize(adj_closed_bol_up, 0.6, 1, TraderAgent.SUB_STATE_QUANTIZE_RESOLUTION)
         #TODO earning ratio should be quantized based on expected market return?
         #e.g. for a long historcal time (e.g. apple, microsoft, the max can be 300)
+        #currently earning ratio is not included in Q-state
         earning_ratio_quantized = self.quantize(earning_ratio, 0, 2, TraderAgent.SUB_STATE_QUANTIZE_RESOLUTION)
 
         #test removing earning ratio from state, earning ratio is sunk cost
